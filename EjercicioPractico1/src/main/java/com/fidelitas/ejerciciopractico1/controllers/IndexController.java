@@ -13,6 +13,6 @@ public class IndexController {
     
     @GetMapping("/contacto")
     public String contacto() {
-        return "contacto"; // Carga la interfaz de contacto
+        return "contacto";
     }
 }

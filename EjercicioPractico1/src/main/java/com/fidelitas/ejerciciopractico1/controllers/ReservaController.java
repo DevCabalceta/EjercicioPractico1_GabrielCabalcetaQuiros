@@ -16,7 +16,7 @@ public class ReservaController {
     private ReservaService reservaService;
 
     @Autowired
-    private ServicioService servicioService; // Lo necesitamos para el "Select" de clases
+    private ServicioService servicioService; 
 
     @GetMapping("/listado")
     public String listado(Model model) {
