@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold m-0" style="letter-spacing: -0.5px;">Reservas de Clases</h2>
+            <a th:href="@{/reserva/nuevo}" class="btn btn-primary btn-fitness shadow-sm">
+                <i class="bi bi-calendar-plus me-1"></i> Nueva Reserva
+            </a>
+        </div>
+
+        <div class="card-fitness p-4">
+            <div class="table-responsive">
+                <table class="table table-borderless align-middle mb-0">
+                    <thead class="border-bottom">
+                        <tr class="text-muted" style="font-size: 13px; text-transform: uppercase;">
+                            <th class="fw-semibold">Cliente</th>
+                            <th class="fw-semibold">Fecha</th>
+                            <th class="fw-semibold">Clase (Servicio)</th>
+                            <th class="text-end fw-semibold">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="reserva : ${reservas}" class="border-bottom">
+                            <td class="fw-semibold text-dark">
+                                <i class="bi bi-person-circle text-muted me-2"></i>
+                                <span th:text="${reserva.nombreCliente}"></span>
+                            </td>
+                            <td>
+                                <span class="badge bg-light text-dark border" style="border-radius: 8px; font-weight: 500;" th:text="${reserva.fecha}"></span>
+                            </td>
+                            <td th:text="${reserva.servicio.nombre}"></td>
+                            <td class="text-end">
+                                <a th:href="@{/reserva/modificar/} + ${reserva.id}" class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width: 36px; height: 36px; line-height: 22px;">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a th:href="@{/reserva/eliminar/} + ${reserva.id}" class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width: 36px; height: 36px; line-height: 22px;" onclick="return confirm('¿Seguro que deseas cancelar esta reserva?');">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

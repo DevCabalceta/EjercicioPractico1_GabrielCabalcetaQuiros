@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/reserva/listado}" class="btn btn-light rounded-circle me-3 shadow-sm text-dark" style="width: 42px; height: 42px; padding: 8px;">
+                        <i class="bi bi-arrow-left fs-5"></i>
+                    </a>
+                    <h2 class="fw-bold m-0" style="letter-spacing: -0.5px;" th:text="${reserva.id != null ? 'Editar Reserva' : 'Nueva Reserva'}"></h2>
+                </div>
+
+                <div class="card-fitness p-5">
+                    <form th:action="@{/reserva/guardar}" th:object="${reserva}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+                        
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small text-uppercase">Nombre del Cliente</label>
+                            <input type="text" class="form-control form-control-lg bg-light border-0" style="border-radius: 12px;" th:field="*{nombreCliente}" placeholder="Ej. Juan Pérez" required>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold text-muted small text-uppercase">Fecha de la Reserva</label>
+                            <input type="date" class="form-control form-control-lg bg-light border-0" style="border-radius: 12px;" th:field="*{fecha}" required>
+                        </div>
+
+                        <div class="mb-5">
+                            <label class="form-label fw-semibold text-muted small text-uppercase">Clase (Servicio)</label>
+                            <select class="form-select form-select-lg bg-light border-0" style="border-radius: 12px;" th:field="*{servicio.id}" required>
+                                <option value="" disabled selected>Seleccione la clase...</option>
+                                <option th:each="serv : ${servicios}" 
+                                        th:value="${serv.id}" 
+                                        th:text="${serv.nombre} + ' (₡' + ${serv.precio} + ')'"></option>
+                            </select>
+                        </div>
+
+                        <div class="d-grid mt-2">
+                            <button type="submit" class="btn btn-dark btn-fitness btn-lg">
+                                Guardar Reserva <i class="bi bi-check2 me-1"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

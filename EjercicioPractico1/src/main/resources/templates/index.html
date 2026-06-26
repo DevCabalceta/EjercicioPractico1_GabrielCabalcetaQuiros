@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+                <h1 class="display-4 fw-bold mb-3" style="letter-spacing: -1px;">
+                    Desafía tus límites.<br>
+                    <span class="text-primary">Descubre el nuevo HIIT.</span>
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Nuestra nueva clase de HIIT Intensivo está diseñada para quemar calorías y ganar resistencia en tiempo récord. Únete hoy y transforma tu cuerpo.
+                </p>
+                <a th:href="@{/servicio/listado}" class="btn btn-primary btn-fitness btn-lg shadow-sm">
+                    Ver todas las clases <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="card-fitness">
+                    <img th:src="@{/img/gym.jpg}"
+                         class="img-fluid" style="border-radius: 12px;" alt="Entrenamiento HIIT">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

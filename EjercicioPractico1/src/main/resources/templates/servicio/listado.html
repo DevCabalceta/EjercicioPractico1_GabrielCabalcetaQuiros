@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="fw-bold m-0" style="letter-spacing: -0.5px;">Clases Disponibles</h2>
+            <a th:href="@{/servicio/nuevo}" class="btn btn-primary btn-fitness shadow-sm">
+                <i class="bi bi-plus-circle me-1"></i> Nueva Clase
+            </a>
+        </div>
+
+        <div class="card-fitness p-4">
+            <div class="table-responsive">
+                <table class="table table-borderless align-middle mb-0">
+                    <thead class="border-bottom">
+                        <tr class="text-muted" style="font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px;">
+                            <th class="fw-semibold">Nombre de la Clase</th>
+                            <th class="fw-semibold">Categoría</th>
+                            <th class="fw-semibold">Precio</th>
+                            <th class="text-end fw-semibold">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="servicio : ${servicios}" class="border-bottom" style="transition: background-color 0.2s;">
+                            <td class="fw-semibold text-dark" th:text="${servicio.nombre}"></td>
+                            <td>
+                                <span class="badge bg-light text-dark border" style="border-radius: 8px; font-weight: 500;" th:text="${servicio.categoria.nombre}"></span>
+                            </td>
+                            <td class="text-muted" th:text="'₡' + ${#numbers.formatDecimal(servicio.precio, 1, 'COMMA', 2, 'POINT')}"></td>
+                            <td class="text-end">
+                                <a th:href="@{/servicio/modificar/} + ${servicio.id}" class="btn btn-light btn-sm rounded-circle me-1 text-primary shadow-sm" style="width: 36px; height: 36px; line-height: 22px;" title="Editar">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a th:href="@{/servicio/eliminar/} + ${servicio.id}" class="btn btn-light btn-sm rounded-circle text-danger shadow-sm" style="width: 36px; height: 36px; line-height: 22px;" onclick="return confirm('¿Seguro que deseas eliminar esta clase?');" title="Eliminar">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr th:if="${servicios == null or servicios.empty}">
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+                                No hay clases registradas por el momento.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>

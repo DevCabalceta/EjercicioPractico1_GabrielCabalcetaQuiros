@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout/plantilla :: head}"></head>
+<body>
+    <header th:replace="~{layout/plantilla :: header}"></header>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/categoria/listado}" class="btn btn-light rounded-circle me-3 shadow-sm text-dark" style="width: 42px; height: 42px; padding: 8px;">
+                        <i class="bi bi-arrow-left fs-5"></i>
+                    </a>
+                    <h2 class="fw-bold m-0" style="letter-spacing: -0.5px;" th:text="${categoria.id != null ? 'Editar Categoría' : 'Nueva Categoría'}"></h2>
+                </div>
+
+                <div class="card-fitness p-5">
+                    <form th:action="@{/categoria/guardar}" th:object="${categoria}" method="post">
+                        <input type="hidden" th:field="*{id}"/>
+                        <div class="mb-5">
+                            <label class="form-label fw-semibold text-muted small text-uppercase">Nombre</label>
+                            <input type="text" class="form-control form-control-lg bg-light border-0" style="border-radius: 12px;" th:field="*{nombre}" placeholder="Ej. Cardio Extremo" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-dark btn-fitness btn-lg">
+                                Guardar Categoría <i class="bi bi-check2 me-1"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{layout/plantilla :: footer}"></footer>
+</body>
+</html>
